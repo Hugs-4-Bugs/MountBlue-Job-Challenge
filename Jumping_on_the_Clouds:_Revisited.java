@@ -1,22 +1,21 @@
-static int jumpingOnClouds(int[] c, int k) {
-        int  res=100;
-        int n=c.length;
-        int flag=0;
-        for(int i=0;flag!=1;i+=k)
-        {
-            if(c[(i+k)%n]==1){
-                res=res-2-1;
-                
-            }else{
-                res=res-1;
-            }
-            if((i+k)%n==0)
-                {
-                    flag=1;
+public static int jumpingOnClouds(List<Integer> c) {
+        int stepCounter = 0;
+        int index = 0;
+
+        while(index < c.size() -1) {
+            if(index == c.size() - 2) {
+                if (c.get(c.size() - 1) != 1) {
+                    stepCounter++;
                 }
+                break;
+            }
+            if(c.get(index+2) == 0) {
+                index+=2;
+            } else {
+                index++;
+            }
+            stepCounter++;
             
         }
-        return res;
-
-
+        return stepCounter;
     }
