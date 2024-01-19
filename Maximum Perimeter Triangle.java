@@ -1,17 +1,24 @@
-
-    public static List<Long> maximumPerimeterTriangle(List<Integer> sticks) {
-        sticks.sort(Integer::compareTo);
-        long maxPerimeter = -1L;
-        List<Long> result = new ArrayList<>();
-        for(int i = 0; i < sticks.size() - 2; ++i) {
-            long val = sticks.get(i) + sticks.get(i + 1);
-            if(val > sticks.get(i + 2) && maxPerimeter < val + sticks.get(i + 2)) {
-                result = new ArrayList<>(Arrays.asList((long) sticks.get(i), (long) sticks.get(i + 1), (long) sticks.get(i + 2)));
-                maxPerimeter = Math.max(maxPerimeter, val + sticks.get(i + 2));
+public static List<Integer> maximumPerimeterTriangle(List<Integer> sticks) {
+    // Write your code here
+        List<Integer> result = new ArrayList<>();
+        Collections.sort(sticks, Comparator.reverseOrder());
+        for (int i = 0; i < sticks.size(); i++) {
+            for (int j = i + 1; j < sticks.size(); j++) {
+                for (int k = j + 1; k < sticks.size(); k++) {
+                    if (isValidTriangle(sticks.get(i), sticks.get(j), sticks.get(k))) {
+                        result.add(sticks.get(k));
+                        result.add(sticks.get(j));
+                        result.add(sticks.get(i));
+                        return result;
+                    }
+                }
             }
         }
-        if(maxPerimeter == -1) {
-            return Collections.singletonList(-1L);
-        }
+        result.add(-1);
         return result;
     }
+
+    private static boolean isValidTriangle(int a, int b, int c) {
+        return a < b + c;
+    }
+        
