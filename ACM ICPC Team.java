@@ -16,6 +16,7 @@ public static List<Integer> acmTeam(List<String> topic) {
             map.put(Arrays.asList(i+1,j+1),count);
         }
     }
+    
 
      int max=map.entrySet().stream().max((a,b)->a.getValue().compareTo(b.getValue())).get().getValue();
      int maxGroup= (int)map.entrySet().stream().filter(e->e.getValue()==max).count();
